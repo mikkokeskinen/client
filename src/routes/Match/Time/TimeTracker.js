@@ -14,11 +14,13 @@ class TimeTracker extends React.Component {
     componentDidMount() {
         this.mounted = true
         if (this.state.autoplay) setTimeout(this.startAutoplay, 300)
+        window.addEventListener('keydown', this.keyboardPause.bind(this))
     }
 
     componentWillUnmount() {
         cancelAnimationFrame(this.rafId)
         this.mounted = false
+        window.removeEventListener('keydown', this.keyboardPause.bind(this))
     }
 
     loop = time => {
@@ -58,6 +60,12 @@ class TimeTracker extends React.Component {
             this.stopAutoplay()
         } else {
             this.startAutoplay()
+        }
+    }
+
+    keyboardPause = e => {
+        if (e.keyCode === 32) {
+            this.toggleAutoplay()
         }
     }
 
