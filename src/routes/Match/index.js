@@ -111,6 +111,7 @@ class Match extends React.Component {
 
     componentDidMount() {
         window.addEventListener('resize', this.updateMapSize.bind(this))
+        window.addEventListener('keydown', this.keyboardPause.bind(this))
         this.updateMapSize()
     }
 
@@ -134,8 +135,15 @@ class Match extends React.Component {
         }
     }
 
+    keyboardPause = e => {
+        if (e.keyCode === 32) {
+            this.toggleAutoplay()
+        }
+    }
+
     componentWillUnmount() {
         window.removeEventListener('resize', this.updateMapSize.bind(this))
+        window.removeEventListener('keydown', this.keyboardPause.bind(this))
     }
 
     loadTelemetry = async () => {
