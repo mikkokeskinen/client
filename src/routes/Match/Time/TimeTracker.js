@@ -32,7 +32,7 @@ class TimeTracker extends React.Component {
                 const prev = prevState.msSinceEpoch
 
                 if (Math.floor(prev / 1000) > this.props.durationSeconds) {
-                    return { msSinceEpoch: 1000 }
+                    return { autoplay: false }
                 }
 
                 return { msSinceEpoch: prevState.msSinceEpoch + (prevState.autoplaySpeed * elapsedTime) }
